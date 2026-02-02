@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   mediaproxyoma:
-    image: yonle/mediaproxyma:latest
+    image: yonle/mediaproxyoma:latest
     build: .
     container_name: mediaproxyoma
     depends_on:
