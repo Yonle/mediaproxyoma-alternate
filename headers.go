@@ -14,14 +14,12 @@ var clientHeaders = []string{
 // upstream -> client
 var upstreamHeaders = []string{
 	"Content-Type",
-	//"Content-Length", <-- already dealed via http.Response.ContentLength
 	"Content-Encoding",
 	"Content-Range",
 	"Accept-Ranges",
 
 	"ETag",
 	"Last-Modified",
-	"Cache-Control",
 	"Expires",
 	"Vary",
 
