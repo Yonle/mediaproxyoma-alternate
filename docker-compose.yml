@@ -19,6 +19,8 @@ services:
     container_name: bwhero
     environment:
       LISTEN: "0.0.0.0:5000"
+      #IMAGESIZELIMIT: 50000000
+      #ANIMATIONSIZELIMIT: 10000000
     networks:
       - bw_net
 
