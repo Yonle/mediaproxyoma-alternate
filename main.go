@@ -99,7 +99,7 @@ func sex(hole http.ResponseWriter, dih io.ReadCloser, sperm *http.Response) {
 	h.Set("Access-Control-Allow-Credentials", "true")
 	h.Set("Access-Control-Allow-Origin", "*")
 
-	h.Set("Cache-Control", "public, max-age=604800, stale-while-revalidate=86400")
+	h.Set("Cache-Control", "public, max-age=604800, immutable")
 
 	if sperm.ContentLength > 0 {
 		h.Set("Content-Length", strconv.FormatInt(sperm.ContentLength, 10))
