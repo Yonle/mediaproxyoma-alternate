@@ -5,8 +5,17 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"os"
 	"time"
 )
+
+var ua = "mediaproxyoma [https://github.com/Yonle/mediaproxyoma] - v0.2-decv"
+
+func init() {
+	if ua_n, e := os.LookupEnv("USER_AGENT"); e {
+		ua = ua_n
+	}
+}
 
 var hc = http.Client{
 	Timeout: 30 * time.Second,
@@ -22,7 +31,7 @@ func proxy(ctx context.Context, r *http.Request, origin_url string) (resp *http.
 	}
 
 	copyClientHeaders(req.Header, r.Header)
-	req.Header.Set("User-Agent", "mediaproxyoma [https://github.com/Yonle/mediaproxyoma] - v0.2-dev")
+	req.Header.Set("User-Agent", ua)
 
 	return hc.Do(req)
 }
