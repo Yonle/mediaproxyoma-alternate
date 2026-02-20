@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-var ua = "mediaproxyoma [https://github.com/Yonle/mediaproxyoma] - v0.2-decv"
+var ua = "mediaproxyoma [https://github.com/Yonle/mediaproxyoma] - v0.3"
 
 func init() {
 	if ua_n, e := os.LookupEnv("USER_AGENT"); e {

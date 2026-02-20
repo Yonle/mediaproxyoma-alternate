@@ -9,7 +9,7 @@ services:
       - bwhero
     environment:
       BWHERO_HOST: "http://bwhero:5000"
-      #USER_AGENT: mediaproxyoma [https://github.com/Yonle/mediaproxyoma] - v0.2-decv
+      #USER_AGENT: mediaproxyoma [https://github.com/Yonle/mediaproxyoma] - v0.3
       LISTEN: "0.0.0.0:8080"
     ports:
       - "8080:8080"
@@ -20,9 +20,10 @@ services:
     container_name: bwhero
     environment:
       LISTEN: "0.0.0.0:5000"
-      #USER_AGENT: mediaproxyoma [https://github.com/Yonle/mediaproxyoma] - v0.2-decv
+      #USER_AGENT: mediaproxyoma [https://github.com/Yonle/mediaproxyoma] - v0.3
       #IMAGESIZELIMIT: 50000000
       #ANIMATIONSIZELIMIT: 50000000
+      #VIDEOSIZELIMIT: 100000000
     networks:
       - bw_net
 
