@@ -12,6 +12,13 @@ var proxypath = "/proxy/"
 var proxypreviewpath = "/proxy/preview/"
 var proxyhost = os.Getenv("BWHERO_HOST")
 var listen = os.Getenv("LISTEN")
+var allowOrigin = "*"
+
+func init() {
+	if ao, e := os.LookupEnv("ALLOW_ORIGIN"); e {
+		allowOrigin = ao
+	}
+}
 
 func main() {
 	if proxyhost == "" || listen == "" {
@@ -77,7 +84,7 @@ func sex(hole http.ResponseWriter, dih io.ReadCloser, sperm *http.Response) {
 
 	h := hole.Header()
 	h.Set("Access-Control-Allow-Credentials", "true")
-	h.Set("Access-Control-Allow-Origin", "*")
+	h.Set("Access-Control-Allow-Origin", allowOrigin)
 
 	h.Set("Cache-Control", "public, max-age=604800, immutable")
 
