@@ -1,13 +1,11 @@
 package main
 
 import (
-	"encoding/base64"
 	"io"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
-	"strings"
 )
 
 var proxypath = "/proxy/"
@@ -24,21 +22,12 @@ func main() {
 	}
 
 	http.HandleFunc(proxypath, func(w http.ResponseWriter, r *http.Request) {
-		url := r.URL.Path[len(proxypath):]
-		sp := strings.SplitN(url, "/", 3)
+		url, err := getUrl(r.URL.Path[len(proxypath):])
 
-		if len(sp) < 3 {
-			http.Error(w, "bad", http.StatusBadRequest)
-			return
-		}
-
-		decb, err := base64.RawURLEncoding.DecodeString(sp[1])
 		if err != nil {
-			http.Error(w, "bad", http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-
-		url = string(decb)
 
 		log.Println("proxying", url)
 		resp, err := proxy(r.Context(), r, url)
@@ -52,26 +41,17 @@ func main() {
 	})
 
 	http.HandleFunc(proxypreviewpath, func(w http.ResponseWriter, r *http.Request) {
-		url := r.URL.Path[len(proxypreviewpath):]
-		sp := strings.SplitN(url, "/", 3)
-
-		if len(sp) < 3 {
-			http.Error(w, "bad", http.StatusBadRequest)
-			return
-		}
-
-		decb, err := base64.RawURLEncoding.DecodeString(sp[1])
+		url, err := getUrl(r.URL.Path[len(proxypreviewpath):])
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
-		url = string(decb)
-
 		log.Println("previewing", url)
 		resp, err := proxy(r.Context(), r, buildUrl(url))
 		if err != nil {
 			log.Println("can't fetch from bwhero:", err)
+
 			resp, err := proxy(r.Context(), r, url)
 			if err != nil {
 				log.Println("give up on fetching to upstream:", err)
