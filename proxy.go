@@ -43,5 +43,5 @@ func buildUrl(upstr string, isStatic bool) string {
 	} else {
 		anim = 1
 	}
-	return fmt.Sprintf("%s?url=%s&bw=0&l=40&nr=1&a=%d", proxyhost, url.QueryEscape(upstr), anim)
+	return fmt.Sprintf("%s?url=%s&bw=0&t=1080&l=40&nr=1&a=%d", proxyhost, url.QueryEscape(upstr), anim)
 }
